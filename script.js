@@ -1,3 +1,1 @@
-
-// Script kosong untuk website Moderen Bicycle
-console.log('Website siap!');
+console.log("Moderen Bicycle script aktif.");
