@@ -3,21 +3,89 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dashboard - Moderen Bicycle</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Dashboard Moderen Bicycle</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f3f3f3;
+    }
+
+    h1 {
+      color: #2c3e50;
+    }
+
+    .vip-button {
+      margin: 5px;
+      padding: 10px 15px;
+      border: none;
+      background-color: #3498db;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .vip-button:hover {
+      background-color: #2980b9;
+    }
+
+    #status-vip {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>Dashboard Kamu</h1>
-    <p>Selamat datang di akun investasi kamu!</p>
-  </header>
+  <h1>Dashboard</h1>
 
-  <main>
-    <p>Fitur dashboard akan segera tersedia...</p>
-  </main>
+  <p>Saldo kamu: <span id="saldo">Rp0</span></p>
+  <p id="status-vip">Memuat status VIP...</p>
 
-  <footer>
-    <a href="index.html" class="btn">Kembali ke Beranda</a>
-  </footer>
+  <button onclick="tambahSaldo(100000)" class="vip-button">Top Up Saldo Rp100.000</button>
+
+  <h3>Pilih VIP:</h3>
+  <button class="vip-button" onclick="beliVIP('VIP Pemula', 75000)">VIP Pemula - Rp75.000</button>
+  <button class="vip-button" onclick="beliVIP('VIP 1', 100000)">VIP 1 - Rp100.000</button>
+  <button class="vip-button" onclick="beliVIP('VIP 2', 200000)">VIP 2 - Rp200.000</button>
+  <button class="vip-button" onclick="beliVIP('VIP 3', 300000)">VIP 3 - Rp300.000</button>
+  <button class="vip-button" onclick="beliVIP('VIP 4', 500000)">VIP 4 - Rp500.000</button>
+  <button class="vip-button" onclick="beliVIP('VIP 5', 750000)">VIP 5 - Rp750.000</button>
+  <button class="vip-button" onclick="beliVIP('VIP 6', 1000000)">VIP 6 - Rp1.000.000</button>
+  <button class="vip-button" onclick="beliVIP('VIP 7', 1500000)">VIP 7 - Rp1.500.000</button>
+  <button class="vip-button" onclick="beliVIP('VIP 8', 2000000)">VIP 8 - Rp2.000.000</button>
+  <button class="vip-button" onclick="beliVIP('VIP 9', 3000000)">VIP 9 - Rp3.000.000</button>
+  <button class="vip-button" onclick="beliVIP('VIP 10', 5000000)">VIP 10 - Rp5.000.000</button>
+
+  <script>
+    // Ambil saldo dan VIP dari localStorage
+    let saldo = parseInt(localStorage.getItem("saldo")) || 0;
+    let statusVIP = localStorage.getItem("statusVIP") || "Belum membeli VIP";
+
+    function updateTampilan() {
+      document.getElementById("saldo").innerText = "Rp" + saldo.toLocaleString();
+      document.getElementById("status-vip").innerText = "Status VIP: " + statusVIP;
+    }
+
+    function tambahSaldo(jumlah) {
+      saldo += jumlah;
+      localStorage.setItem("saldo", saldo);
+      updateTampilan();
+    }
+
+    function beliVIP(nama, harga) {
+      if (saldo >= harga) {
+        saldo -= harga;
+        statusVIP = nama;
+        localStorage.setItem("saldo", saldo);
+        localStorage.setItem("statusVIP", statusVIP);
+        alert("Berhasil membeli " + nama);
+        updateTampilan();
+      } else {
+        alert("Saldo tidak cukup untuk membeli " + nama);
+      }
+    }
+
+    updateTampilan();
+  </script>
 </body>
 </html>
